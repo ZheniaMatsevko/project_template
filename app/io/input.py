@@ -1,3 +1,5 @@
+import os.path
+import pandas as pd
 
 
 def read_from_console(prompt):
@@ -9,7 +11,7 @@ def read_from_console(prompt):
 
     Returns: str. User input.
     """
-    pass
+    return input(prompt)
 
 
 def read_from_file(filepath):
@@ -23,7 +25,12 @@ def read_from_file(filepath):
         str. Contents of the requested file.
         None. If there is no such file or directory.
     """
-    pass
+    if not os.path.isfile(filepath):
+        print(f'No such file or directory: {filepath}')
+        return None
+
+    with open(filepath) as file:
+        return file.read()
 
 
 def read_from_file_with_pandas(filepath):
@@ -37,4 +44,8 @@ def read_from_file_with_pandas(filepath):
            str. Contents of the requested file.
            None. If there is no such file or directory.
     """
-    pass
+    if not os.path.isfile(filepath):
+        print(f'No such file or directory: {filepath}')
+        return None
+
+    return pd.read_csv(filepath)
